@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 config();
 
-import router from './router/movie.route.js';
+import router from './router/index.route.js';
 import { connectDB } from './config/db.js';
 
 const app = express();

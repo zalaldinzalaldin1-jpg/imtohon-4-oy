@@ -6,7 +6,7 @@ router
     .post('/', controller.create)
     .get('/', controller.findAll)
     .get('/:id', controller.findOne)
-    .update('/:id', controller.update)
+    .patch('/:id', controller.update)
     .delete('/:id', controller.remove)
 
 export default router;

@@ -7,14 +7,14 @@ class MovieController{
     async create(req, res){
         try {
             const { title } = req.body
-            const movieData = Movie.findById({ title });
+            const movieData = await Movie.findOne({ title });
             if (movieData) {
                 throw new ApiError('this movie alredy exist', 404)
             }
-            const data = await Movie.create();
+            const data = await Movie.create(req.body);
             successRes(res, data, 201)
         } catch (error) {
-            errorRes(res, error.message)
+            errorRes(res, error)
         }
     }
     async findAll(req, res){
@@ -23,7 +23,7 @@ class MovieController{
             if (!movies) {
                 throw new ApiError('movies not found', 404)
             }
-            successRes(res, data)
+            successRes(res, movies)
         } catch (error) {
             errorRes(res, error)
         }
@@ -34,7 +34,7 @@ class MovieController{
             if (!movie) {
                 throw new ApiError('movie not found')
             }
-            successRes(res, data)
+            successRes(res, movie)
         } catch (error) {
             errorRes(res, error)
         }
@@ -45,7 +45,7 @@ class MovieController{
             if (!movie) {
                 throw new ApiError('movie not found', 404)
             }
-            successRes(res, data)
+            successRes(res, movie)
         } catch (error) {
             errorRes(res, error)
         }
@@ -56,11 +56,11 @@ class MovieController{
             if (!movie) {
                 throw new ApiError('movie not found', 404)
             }
-            successRes(res, data)
+            successRes(res, movie)
         } catch (error) {
             errorRes(res, error)
         }
     }
 }
 
-export default new MovieController();
+export default new MovieController;
